@@ -53,15 +53,15 @@ const Booking: React.FC = () => {
 
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
-          <div className="bg-slate-50 p-12 rounded-sm border border-slate-100">
+          <div className="bg-white p-12 rounded-2xl shadow-2xl shadow-slate-200/50 border border-slate-100">
             {step < 4 && (
               <div className="flex items-center justify-between mb-12">
                 {[1, 2, 3].map(s => (
-                  <div key={s} className="flex flex-col items-center gap-2">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black ${step >= s ? 'bg-primary text-white' : 'bg-slate-200 text-slate-400'}`}>
+                  <div key={s} className="flex flex-col items-center gap-3">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-black transition-all duration-300 ${step >= s ? 'bg-primary text-white shadow-lg shadow-primary/30' : 'bg-slate-100 text-slate-400'}`}>
                       {s}
                     </div>
-                    <span className={`text-[8px] font-black uppercase tracking-widest ${step >= s ? 'text-primary' : 'text-slate-400'}`}>
+                    <span className={`text-[9px] font-black uppercase tracking-widest ${step >= s ? 'text-primary' : 'text-slate-400'}`}>
                       {s === 1 ? 'Contact' : s === 2 ? 'Service' : 'Confirm'}
                     </span>
                   </div>
@@ -94,7 +94,7 @@ const Booking: React.FC = () => {
                       <option value="Elite">Elite</option>
                     </select>
                   </div>
-                  <textarea name="requirements" value={formData.requirements} onChange={handleChange} rows={4} className="w-full px-6 py-4 bg-white border border-slate-100 outline-none focus:border-primary transition-all text-sm" placeholder="Special requirements?"></textarea>
+                  <textarea name="requirements" value={formData.requirements} onChange={handleChange} rows={4} className="w-full px-6 py-4 bg-white border border-slate-200 rounded-lg outline-none focus:border-primary transition-all text-sm" placeholder="Special requirements?"></textarea>
                 </div>
               )}
 
@@ -102,7 +102,7 @@ const Booking: React.FC = () => {
                 <div className="text-center py-6 animate-in zoom-in duration-300">
                   <div className="text-4xl mb-4">📝</div>
                   <h3 className="text-xl font-medium text-brand font-display mb-2">Review your request</h3>
-                  <div className="bg-white p-6 border border-slate-100 text-left text-sm space-y-3 max-w-md mx-auto rounded-xl">
+                  <div className="bg-slate-50 p-6 border border-slate-100 text-left text-sm space-y-3 max-w-md mx-auto rounded-xl">
                     <p><strong>Name:</strong> {formData.fullName}</p>
                     <p><strong>Email:</strong> {formData.email}</p>
                     <p><strong>Service:</strong> {formData.level} {formData.service}</p>
