@@ -1,18 +1,20 @@
 import React from 'react';
 import ScrollReveal from '../components/ScrollReveal';
 
+import { Building2, Grid2X2, Droplets, Sparkles, Brush, Waves, Users, Home, ScanLine, Construction, AlertCircle } from 'lucide-react';
+
 const services = [
-  { id: 'commercial', title: 'Commercial & Retail', description: 'Janitorial services for office buildings and retail facilities.', icon: '🏢' },
-  { id: 'window', title: 'Window Cleaning', description: 'Sparkling windows to welcome your guests and customers.', icon: '🪟' },
-  { id: 'washroom', title: 'Washroom Specialist', description: 'Steam cleaning vapors for a truly deep sanitization.', icon: '🚿' },
-  { id: 'floor', title: 'Floor Care', description: 'Exceptional floor maintenance for healthcare and corporate facilities.', icon: '✨' },
-  { id: 'stripping', title: 'Stripping & Waxing', description: 'Restoring floors from high traffic and harsh winters.', icon: '🧹' },
-  { id: 'carpet', title: 'Carpet Cleaning', description: 'Care extractions to ensure longevity and aesthetic appeal.', icon: '🧼' },
-  { id: 'porter', title: 'Day Porter', description: 'An extra hand for high traffic times to keep things clean.', icon: '🤵' },
-  { id: 'residential', title: 'Residential', description: 'Professional cleaning solutions for your home.', icon: '🏠' },
-  { id: 'pressure', title: 'Pressure Washing', description: 'Powerful cleaning for tough stains and exterior grime.', icon: '🔫' },
-  { id: 'construction', title: 'Post Construction', description: 'Detailed cleaning for new developments and renovations.', icon: '🏗️' },
-  { id: 'emergency', title: 'Emergency', description: 'Rapid response teams for unexpected situations.', icon: '🚨' }
+  { id: 'commercial', title: 'Commercial & Retail', description: 'Janitorial services for office buildings and retail facilities.', icon: <Building2 className="w-6 h-6 text-primary" strokeWidth={1.5} /> },
+  { id: 'window', title: 'Window Cleaning', description: 'Sparkling windows to welcome your guests and customers.', icon: <Grid2X2 className="w-6 h-6 text-primary" strokeWidth={1.5} /> },
+  { id: 'washroom', title: 'Washroom Specialist', description: 'Steam cleaning vapors for a truly deep sanitization.', icon: <Droplets className="w-6 h-6 text-primary" strokeWidth={1.5} /> },
+  { id: 'floor', title: 'Floor Care', description: 'Exceptional floor maintenance for healthcare and corporate facilities.', icon: <Sparkles className="w-6 h-6 text-primary" strokeWidth={1.5} /> },
+  { id: 'stripping', title: 'Stripping & Waxing', description: 'Restoring floors from high traffic and harsh winters.', icon: <Brush className="w-6 h-6 text-primary" strokeWidth={1.5} /> },
+  { id: 'carpet', title: 'Carpet Cleaning', description: 'Care extractions to ensure longevity and aesthetic appeal.', icon: <Waves className="w-6 h-6 text-primary" strokeWidth={1.5} /> },
+  { id: 'porter', title: 'Day Porter', description: 'An extra hand for high traffic times to keep things clean.', icon: <Users className="w-6 h-6 text-primary" strokeWidth={1.5} /> },
+  { id: 'residential', title: 'Residential Buildings Cleaning', description: 'Professional cleaning solutions for residential properties.', icon: <Home className="w-6 h-6 text-primary" strokeWidth={1.5} /> },
+  { id: 'pressure', title: 'Pressure Washing', description: 'Powerful cleaning for tough stains and exterior grime.', icon: <ScanLine className="w-6 h-6 text-primary" strokeWidth={1.5} /> },
+  { id: 'construction', title: 'Post Construction', description: 'Detailed cleaning for new developments and renovations.', icon: <Construction className="w-6 h-6 text-primary" strokeWidth={1.5} /> },
+  { id: 'emergency', title: 'Emergency', description: 'Rapid response teams for unexpected situations.', icon: <AlertCircle className="w-6 h-6 text-primary" strokeWidth={1.5} /> }
 ];
 
 const Services: React.FC = () => {

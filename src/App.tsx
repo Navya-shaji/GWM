@@ -12,6 +12,8 @@ import Gallery from './pages/Gallery';
 import Booking from './pages/Booking';
 import Dashboard from './pages/Dashboard';
 import Contact from './pages/Contact';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
 
 const PageTransition = ({ children }: { children: React.ReactNode }) => (
   <motion.div
@@ -37,6 +39,8 @@ function AnimatedRoutes() {
         <Route path="/booking" element={<PageTransition><Booking /></PageTransition>} />
         <Route path="/dashboard" element={<PageTransition><Dashboard /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+        <Route path="/admin" element={<PageTransition><AdminLogin /></PageTransition>} />
+        <Route path="/admin/dashboard" element={<PageTransition><AdminDashboard /></PageTransition>} />
       </Routes>
     </AnimatePresence>
   );

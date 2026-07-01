@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ScrollReveal from '../components/ScrollReveal';
 
+import { Droplets, Sparkles, Grid2X2 } from 'lucide-react';
+
 const Home: React.FC = () => {
   return (
     <div className="flex flex-col w-full bg-white">
@@ -34,15 +36,15 @@ const Home: React.FC = () => {
               <div className="flex items-center gap-6">
                 <Link
                   to="/booking"
-                  className="px-10 py-4 bg-brand text-white font-bold text-sm hover:bg-primary transition-all"
+                  className="px-10 py-4 bg-brand text-white font-bold text-sm hover:bg-primary transition-all shadow-lg hover:shadow-primary/30 hover:-translate-y-1 rounded-sm"
                 >
                   Request a Quote
                 </Link>
                 <Link
                   to="/services"
-                  className="text-sm font-bold text-brand hover:text-primary transition-colors flex items-center gap-2"
+                  className="text-sm font-bold text-brand hover:text-primary transition-colors flex items-center gap-2 group"
                 >
-                  Our Services &rarr;
+                  Our Services <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
                 </Link>
               </div>
             </ScrollReveal>
@@ -61,20 +63,20 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Featured Services - Centered Text */}
-      <section className="py-20 bg-white border-t border-slate-50">
+      {/* Featured Services - Premium Cards */}
+      <section className="py-24 bg-slate-50/50 border-t border-slate-50">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
-              { title: 'Washroom Specialist', desc: 'Steam cleaning vapors for deep sanitization.', icon: '🚿' },
-              { title: 'Floor Care', desc: 'Expert janitorial maintenance since 1991.', icon: '✨' },
-              { title: 'Window Cleaning', desc: 'Flawless first impressions for your guests.', icon: '🪟' },
+              { title: 'Washroom Specialist', desc: 'Steam cleaning vapors for deep sanitization.', icon: <Droplets className="w-8 h-8 text-primary" strokeWidth={1.5} /> },
+              { title: 'Floor Care', desc: 'Expert janitorial maintenance since 1991.', icon: <Sparkles className="w-8 h-8 text-primary" strokeWidth={1.5} /> },
+              { title: 'Window Cleaning', desc: 'Flawless first impressions for your guests.', icon: <Grid2X2 className="w-8 h-8 text-primary" strokeWidth={1.5} /> },
             ].map((s, i) => (
               <ScrollReveal key={i} delay={i * 0.1} width="100%">
-                <div className="flex flex-col items-center text-center space-y-4">
-                  <div className="text-3xl mb-2">{s.icon}</div>
+                <div className="group flex flex-col items-center text-center space-y-5 p-10 bg-white border border-slate-100 rounded-lg hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-300 hover:-translate-y-1">
+                  <div className="p-4 bg-blue-50 rounded-full group-hover:scale-110 transition-transform duration-300">{s.icon}</div>
                   <h3 className="text-xl font-medium text-brand font-display">{s.title}</h3>
-                  <p className="text-slate-400 text-xs leading-relaxed max-w-[240px] mx-auto">{s.desc}</p>
+                  <p className="text-slate-500 text-sm leading-relaxed max-w-[240px] mx-auto font-light">{s.desc}</p>
                 </div>
               </ScrollReveal>
             ))}

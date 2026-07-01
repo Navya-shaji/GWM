@@ -1,26 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Pricing: React.FC = () => {
-  const [sqft, setSqft] = useState(1000);
-  const [frequency, setFrequency] = useState('weekly');
-  const [tier, setTier] = useState('standard');
-  const [estimate, setEstimate] = useState(0);
-
-  useEffect(() => {
-    let baseRate = 0.15;
-    if (tier === 'premium') baseRate = 0.25;
-    if (tier === 'elite') baseRate = 0.40;
-
-    let multiplier = 1;
-    if (frequency === 'daily') multiplier = 0.8;
-    if (frequency === 'bi-weekly') multiplier = 1.1;
-    if (frequency === 'one-time') multiplier = 1.5;
-
-    setEstimate(Math.round(sqft * baseRate * multiplier));
-  }, [sqft, frequency, tier]);
-
   return (
-    <div className="flex flex-col w-full bg-white">
+    <div className="flex flex-col w-full bg-white min-h-[70vh]">
       <section className="bg-white py-16 border-b border-slate-50">
         <div className="container mx-auto px-4">
           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-4 block">Investment</span>
@@ -30,57 +13,22 @@ const Pricing: React.FC = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div className="bg-slate-50 p-10 border border-slate-100">
-              <h2 className="text-2xl font-medium text-brand font-display mb-10">Calculator</h2>
-              
-              <div className="space-y-10">
-                <div>
-                  <label className="block text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">Area: <span className="text-primary">{sqft.toLocaleString()} Sq. Ft.</span></label>
-                  <input 
-                    type="range" min="500" max="50000" step="500"
-                    value={sqft} onChange={(e) => setSqft(parseInt(e.target.value))}
-                    className="w-full h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-8">
-                  <div>
-                    <label className="block text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">Service Tier</label>
-                    <select value={tier} onChange={(e) => setTier(e.target.value)} className="w-full bg-white border border-slate-100 p-3 text-xs outline-none">
-                      <option value="standard">Standard</option>
-                      <option value="premium">Premium</option>
-                      <option value="elite">Elite</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">Frequency</label>
-                    <select value={frequency} onChange={(e) => setFrequency(e.target.value)} className="w-full bg-white border border-slate-100 p-3 text-xs outline-none">
-                      <option value="daily">Daily</option>
-                      <option value="weekly">Weekly</option>
-                      <option value="bi-weekly">Bi-weekly</option>
-                      <option value="one-time">One-time</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-8">
-              <div className="space-y-2">
-                <span className="text-[9px] font-black uppercase tracking-[0.3em] text-primary">Monthly Estimate</span>
-                <div className="text-7xl md:text-8xl font-medium text-brand font-display tracking-tighter">
-                  ${estimate.toLocaleString()}
-                </div>
-              </div>
-              <p className="text-slate-400 font-light text-sm max-w-sm leading-relaxed">
-                Estimated pricing for professional hygiene services.
-              </p>
-              <button className="px-8 py-4 bg-brand text-white font-bold text-sm hover:bg-primary transition-all">
-                Get Bespoke Quote
-              </button>
+      <section className="py-24 bg-slate-50 flex-grow flex items-center justify-center">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-3xl mx-auto bg-white p-12 md:p-20 border border-slate-100 rounded-sm shadow-sm space-y-8">
+            <h2 className="text-3xl md:text-4xl font-medium text-brand font-display">
+              Tailored Pricing for Your Business
+            </h2>
+            <p className="text-slate-500 font-light leading-relaxed max-w-xl mx-auto">
+              Every facility has unique requirements. Rather than one-size-fits-all pricing, we provide customized, competitive quotes based on a thorough assessment of your exact needs.
+            </p>
+            <div className="pt-8">
+              <Link 
+                to="/booking" 
+                className="inline-block px-10 py-5 bg-brand text-white font-bold text-sm tracking-widest uppercase hover:bg-primary transition-all rounded-sm shadow-lg"
+              >
+                Request a Bespoke Quote
+              </Link>
             </div>
           </div>
         </div>
