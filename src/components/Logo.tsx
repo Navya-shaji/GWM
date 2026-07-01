@@ -7,11 +7,10 @@ const Logo: React.FC<{ className?: string }> = ({ className }) => {
         {/* Simple Circle Logo like reference */}
         <div className="w-full h-full rounded-full bg-slate-100 flex items-center justify-center overflow-hidden border border-slate-200">
           <div className="absolute inset-0 flex flex-col">
-            <div className="h-1/2 bg-[#00A3DA]"></div>
-            <div className="h-1/2 bg-[#F28C28]"></div>
+            <div className="h-full w-full bg-gradient-to-br from-primary to-brand"></div>
           </div>
-          <div className="w-6 h-6 rounded-full bg-white relative z-10 flex items-center justify-center shadow-sm">
-            <span className="text-[10px] font-black text-brand">GWM</span>
+          <div className="w-7 h-7 rounded-full bg-white relative z-10 flex items-center justify-center shadow-md">
+            <span className="text-[9px] font-black text-brand tracking-tighter">GWM</span>
           </div>
         </div>
       </div>

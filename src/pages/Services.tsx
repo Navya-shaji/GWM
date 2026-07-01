@@ -38,8 +38,10 @@ const Services: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
             {services.map((service, i) => (
               <ScrollReveal key={service.id} delay={i * 0.05} width="100%">
-                <div className="space-y-4">
-                  <div className="text-2xl">{service.icon}</div>
+                <div className="group flex flex-col items-start space-y-4 p-8 bg-white border border-slate-100 rounded-xl hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-300 hover:-translate-y-1 h-full">
+                  <div className="p-3 bg-blue-50/50 rounded-lg group-hover:scale-110 group-hover:bg-blue-50 transition-all duration-300">
+                    {service.icon}
+                  </div>
                   <h3 className="text-xl font-medium text-brand font-display">{service.title}</h3>
                   <p className="text-slate-400 text-sm leading-relaxed">{service.description}</p>
                 </div>
