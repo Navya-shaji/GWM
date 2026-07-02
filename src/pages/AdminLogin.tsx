@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Eye, EyeOff } from 'lucide-react';
 
 const AdminLogin: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = (e: React.FormEvent) => {
@@ -34,26 +36,34 @@ const AdminLogin: React.FC = () => {
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Email Address</label>
+            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Email</label>
             <input 
               type="email" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:border-primary transition-all text-sm"
-              placeholder="admin@gwm.com"
               required
             />
           </div>
           <div>
             <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Password</label>
-            <input 
-              type="password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:border-primary transition-all text-sm"
-              placeholder="••••••••"
-              required
-            />
+            <div className="relative">
+              <input 
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:border-primary transition-all text-sm pr-12"
+                placeholder="••••••••"
+                required
+              />
+              <button
+                type="button"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
           
           <button 
