@@ -12,31 +12,37 @@ const Home: React.FC = () => {
           <img
             src="/images/hero.png"
             alt="Enterprise Cleaning"
-            className="w-full h-full object-cover opacity-30 grayscale"
+            className="w-full h-full object-cover opacity-60 grayscale"
           />
-          <div className="absolute inset-0 bg-black/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
         </div>
 
         <div className="container mx-auto px-4 max-w-7xl relative z-10">
           <div className="max-w-3xl">
             <ScrollReveal direction="up">
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-3 mb-6 drop-shadow-md">
                 <span className="px-3 py-1 bg-white text-black text-xs font-bold uppercase tracking-widest rounded-sm">
                   Est. 1991
                 </span>
-                <span className="text-sm font-bold tracking-widest text-gray-300 uppercase">Trusted Facility Management</span>
+                <span className="text-sm font-bold tracking-widest text-white uppercase" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>Trusted Facility Management</span>
               </div>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.1}>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight mb-6">
+              <h1 
+                className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight mb-6"
+                style={{ textShadow: '0 4px 16px rgba(0,0,0,0.8)' }}
+              >
                 Enterprise-Grade <br />
                 Cleaning Solutions.
               </h1>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
-              <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl leading-relaxed font-medium">
+              <p 
+                className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl leading-relaxed font-medium"
+                style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}
+              >
                 Delivering uncompromising hygiene and facility maintenance for commercial, medical, and industrial properties across the nation.
               </p>
             </ScrollReveal>
