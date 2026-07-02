@@ -21,7 +21,8 @@ const Booking: React.FC = () => {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:5000/api/bookings', {
+      const API_URL = import.meta.env.VITE_API_URL || 'https://gwm-cwgy.onrender.com';
+      const response = await fetch(`${API_URL}/api/bookings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
