@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import Spinner from '../components/Spinner';
 
@@ -98,12 +99,16 @@ const AdminDashboard: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col w-full pt-32 pb-24 bg-slate-50 min-h-screen">
+    <div className="flex flex-col w-full pt-32 pb-24 bg-gradient-to-br from-slate-50 via-indigo-50/40 to-blue-50/40 min-h-screen">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-slate-200 shadow-sm">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white/70 backdrop-blur-2xl p-8 md:p-12 rounded-[2.5rem] border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+        >
           <div className="flex justify-between items-center mb-10">
             <div>
-              <h3 className="text-3xl font-black text-brand mb-2">Admin Dashboard</h3>
+              <h3 className="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-500 mb-2">Admin Dashboard</h3>
               <p className="text-slate-500 text-sm">Manage incoming quote requests</p>
             </div>
             <div className="flex items-center gap-4">
@@ -121,7 +126,12 @@ const AdminDashboard: React.FC = () => {
 
           {bookings.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1 }}
+                className="bg-white/80 p-6 rounded-3xl border border-white/50 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-md transition-shadow duration-300"
+              >
                 <h4 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6">Booking Status</h4>
                 <div className="h-64">
                   <ResponsiveContainer width="100%" height="100%">
@@ -148,8 +158,13 @@ const AdminDashboard: React.FC = () => {
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
-              </div>
-              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="bg-white/80 p-6 rounded-3xl border border-white/50 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-md transition-shadow duration-300"
+              >
                 <h4 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6">Service Demand</h4>
                 <div className="h-64">
                   <ResponsiveContainer width="100%" height="100%">
@@ -189,8 +204,14 @@ const AdminDashboard: React.FC = () => {
                     <td colSpan={5} className="py-10 text-center text-slate-400 text-sm">No bookings found.</td>
                   </tr>
                 ) : (
-                  bookings.map(b => (
-                    <tr key={b._id} className="group hover:bg-slate-50 transition-colors">
+                  bookings.map((b, index) => (
+                    <motion.tr 
+                      key={b._id} 
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 + (index * 0.05) }}
+                      className="group hover:bg-white/60 transition-colors"
+                    >
                       <td className="py-6 pr-4">
                         <p className="font-bold text-brand">{b.fullName}</p>
                         <p className="text-xs text-slate-400">{b.company || 'N/A'}</p>
@@ -223,13 +244,13 @@ const AdminDashboard: React.FC = () => {
                           <option value="Cancelled">Cancelled</option>
                         </select>
                       </td>
-                    </tr>
+                    </motion.tr>
                   ))
                 )}
               </tbody>
             </table>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
