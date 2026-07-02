@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import Spinner from '../components/Spinner';
 
 interface Booking {
@@ -15,6 +17,7 @@ interface Booking {
 }
 
 const AdminDashboard: React.FC = () => {
+  const navigate = useNavigate();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -37,6 +40,25 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
+  const updateStatus = async (id: string, newStatus: string) => {
+    try {
+      const API_URL = import.meta.env.VITE_API_URL || 'https://gwm-cwgy.onrender.com';
+      const response = await fetch(`${API_URL}/api/bookings/${id}/status`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus })
+      });
+      if (response.ok) {
+        setBookings(bookings.map(b => b._id === id ? { ...b, status: newStatus } : b));
+      } else {
+        alert('Failed to update status');
+      }
+    } catch (error) {
+      console.error('Failed to update status:', error);
+      alert('Error updating status');
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
@@ -48,6 +70,33 @@ const AdminDashboard: React.FC = () => {
     );
   }
 
+  // Analytics Calculations
+  const statusCounts = bookings.reduce((acc, curr) => {
+    acc[curr.status] = (acc[curr.status] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const statusData = Object.keys(statusCounts).map(key => ({
+    name: key,
+    value: statusCounts[key]
+  }));
+
+  const serviceCounts = bookings.reduce((acc, curr) => {
+    acc[curr.service] = (acc[curr.service] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const serviceData = Object.keys(serviceCounts).map(key => ({
+    name: key,
+    value: serviceCounts[key]
+  }));
+
+  const COLORS = ['#3b82f6', '#22c55e', '#f97316', '#ef4444', '#8b5cf6'];
+
+  const handleLogout = () => {
+    navigate('/admin');
+  };
+
   return (
     <div className="flex flex-col w-full pt-32 pb-24 bg-slate-50 min-h-screen">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -57,10 +106,68 @@ const AdminDashboard: React.FC = () => {
               <h3 className="text-3xl font-black text-brand mb-2">Admin Dashboard</h3>
               <p className="text-slate-500 text-sm">Manage incoming quote requests</p>
             </div>
-            <div className="bg-primary/10 text-primary px-4 py-2 rounded-xl text-sm font-bold">
-              {bookings.length} Total Bookings
+            <div className="flex items-center gap-4">
+              <div className="bg-primary/10 text-primary px-4 py-2 rounded-xl text-sm font-bold">
+                {bookings.length} Total Bookings
+              </div>
+              <button 
+                onClick={handleLogout}
+                className="bg-slate-100 hover:bg-slate-200 text-slate-600 px-4 py-2 rounded-xl text-sm font-bold transition-colors"
+              >
+                Logout
+              </button>
             </div>
           </div>
+
+          {bookings.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                <h4 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6">Booking Status</h4>
+                <div className="h-64">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={statusData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={60}
+                        outerRadius={80}
+                        paddingAngle={5}
+                        dataKey="value"
+                      >
+                        {statusData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip 
+                        contentStyle={{ borderRadius: '1rem', border: 'none', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
+                      />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                <h4 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6">Service Demand</h4>
+                <div className="h-64">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={serviceData} layout="vertical" margin={{ top: 0, right: 0, left: 30, bottom: 0 }}>
+                      <XAxis type="number" hide />
+                      <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#64748b' }} width={80} />
+                      <Tooltip 
+                        cursor={{ fill: 'transparent' }}
+                        contentStyle={{ borderRadius: '1rem', border: 'none', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
+                      />
+                      <Bar dataKey="value" fill="#3b82f6" radius={[0, 4, 4, 0]} barSize={20}>
+                        {serviceData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="overflow-x-auto">
             <table className="w-full text-left">
@@ -97,9 +204,21 @@ const AdminDashboard: React.FC = () => {
                         {new Date(b.createdAt).toLocaleDateString()}
                       </td>
                       <td className="py-6">
-                        <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-blue-100 text-blue-600">
-                          {b.status}
-                        </span>
+                        <select
+                          value={b.status}
+                          onChange={(e) => updateStatus(b._id, e.target.value)}
+                          className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest outline-none cursor-pointer border-none appearance-none ${
+                            b.status === 'Completed' ? 'bg-green-100 text-green-600' :
+                            b.status === 'Cancelled' ? 'bg-red-100 text-red-600' :
+                            b.status === 'In Progress' ? 'bg-orange-100 text-orange-600' :
+                            'bg-blue-100 text-blue-600'
+                          }`}
+                        >
+                          <option value="Upcoming">Upcoming</option>
+                          <option value="In Progress">In Progress</option>
+                          <option value="Completed">Completed</option>
+                          <option value="Cancelled">Cancelled</option>
+                        </select>
                       </td>
                     </tr>
                   ))
