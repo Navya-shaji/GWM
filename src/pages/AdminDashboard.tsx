@@ -225,7 +225,7 @@ const AdminDashboard: React.FC = () => {
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
-              </div>
+              </motion.div>
             </div>
           )}
 
