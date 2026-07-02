@@ -134,10 +134,10 @@ const AdminDashboard: React.FC = () => {
                         outerRadius={80}
                         paddingAngle={5}
                         dataKey="value"
-                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                        label={({ name, percent }) => `${name} ${((percent || 0) * 100).toFixed(0)}%`}
                         labelLine={false}
                       >
-                        {statusData.map((entry, index) => (
+                        {statusData.map((_, index) => (
                           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
                       </Pie>
@@ -161,7 +161,7 @@ const AdminDashboard: React.FC = () => {
                         contentStyle={{ borderRadius: '1rem', border: 'none', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
                       />
                       <Bar dataKey="value" fill="#3b82f6" radius={[0, 4, 4, 0]} barSize={20}>
-                        {serviceData.map((entry, index) => (
+                        {serviceData.map((_, index) => (
                           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
                       </Bar>
