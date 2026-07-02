@@ -4,13 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary:   { DEFAULT: '#1D4ED8', dark: '#1E40AF' },
-        secondary: { DEFAULT: '#64748B', dark: '#475569' },
+        primary:   { DEFAULT: '#0F172A', dark: '#020617' }, // Deep navy/charcoal
+        secondary: { DEFAULT: '#64748B', dark: '#475569' }, // Slate neutrals
+        accent:    { DEFAULT: '#0284c7', hover: '#0369a1' }, // Corporate Blue CTA
         brand:     { DEFAULT: '#0F172A', light: '#1E293B' },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Cormorant Garamond', 'serif'],
       },
       animation: {
         marquee: 'marquee 25s linear infinite',
