@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import Spinner from '../components/Spinner';
 
 interface Booking {
@@ -134,6 +134,8 @@ const AdminDashboard: React.FC = () => {
                         outerRadius={80}
                         paddingAngle={5}
                         dataKey="value"
+                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                        labelLine={false}
                       >
                         {statusData.map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -142,6 +144,7 @@ const AdminDashboard: React.FC = () => {
                       <Tooltip 
                         contentStyle={{ borderRadius: '1rem', border: 'none', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
                       />
+                      <Legend verticalAlign="bottom" height={36}/>
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
@@ -150,9 +153,9 @@ const AdminDashboard: React.FC = () => {
                 <h4 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6">Service Demand</h4>
                 <div className="h-64">
                   <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={serviceData} layout="vertical" margin={{ top: 0, right: 0, left: 30, bottom: 0 }}>
+                    <BarChart data={serviceData} layout="vertical" margin={{ top: 0, right: 20, left: 40, bottom: 0 }}>
                       <XAxis type="number" hide />
-                      <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#64748b' }} width={80} />
+                      <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#64748b' }} width={90} />
                       <Tooltip 
                         cursor={{ fill: 'transparent' }}
                         contentStyle={{ borderRadius: '1rem', border: 'none', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
@@ -207,7 +210,7 @@ const AdminDashboard: React.FC = () => {
                         <select
                           value={b.status}
                           onChange={(e) => updateStatus(b._id, e.target.value)}
-                          className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest outline-none cursor-pointer border-none appearance-none ${
+                          className={`px-3 py-1 pr-8 rounded-full text-[10px] font-black uppercase tracking-widest outline-none cursor-pointer border-none ${
                             b.status === 'Completed' ? 'bg-green-100 text-green-600' :
                             b.status === 'Cancelled' ? 'bg-red-100 text-red-600' :
                             b.status === 'In Progress' ? 'bg-orange-100 text-orange-600' :
