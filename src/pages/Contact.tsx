@@ -15,10 +15,10 @@ const Contact: React.FC = () => {
 
     // Make sure to replace these with your actual EmailJS credentials!
     emailjs.sendForm(
-      'YOUR_SERVICE_ID', 
-      'YOUR_TEMPLATE_ID', 
+      'service_joyuugs', 
+      'template_fxrb96k', 
       form.current, 
-      'YOUR_PUBLIC_KEY'
+      'rFgdMM-rf1YMAtCSd'
     )
     .then((result) => {
         console.log(result.text);
