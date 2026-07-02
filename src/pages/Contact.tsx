@@ -13,12 +13,14 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
-    // Make sure to replace these with your actual EmailJS credentials!
+    // Use environment variables for EmailJS credentials
     emailjs.sendForm(
-      'service_joyuugs', 
-      'template_fxrb96k', 
+      import.meta.env.VITE_EMAILJS_SERVICE_ID, 
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID, 
       form.current, 
-      'rFgdMM-rf1YMAtCSd'
+      {
+        publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      }
     )
     .then((result) => {
         console.log(result.text);
