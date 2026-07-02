@@ -9,11 +9,14 @@ const AdminLogin: React.FC = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Hardcoded auth for demo purposes
-    if (email === 'admin@gwm.com' && password === 'admin123') {
+
+    const adminEmail = import.meta.env.VITE_ADMIN_EMAIL;
+    const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+
+    if (email === adminEmail && password === adminPassword) {
       navigate('/admin/dashboard');
     } else {
-      alert('Invalid credentials. Use admin@gwm.com / admin123');
+      alert('Invalid credentials.');
     }
   };
 
